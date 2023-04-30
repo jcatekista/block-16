@@ -4,7 +4,7 @@ const price1 = 20;
 const price2 = 25;
 
 //define function
-function sumOfGifts(price1, price22) {
+function sumOfGifts(price1, price2) {
   return price1 + price2;
 }
 
