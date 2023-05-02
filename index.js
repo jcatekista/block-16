@@ -1,4 +1,7 @@
-//customer objects for workshop
+//subscription gets a 25% discount after total
+//coupons give $10 discount after the subscription discount has been calculated
+
+//the total for Timmy should be $65
 const timmy = {
   prescription: "acetaminophen",
   pricePerRefill: 25,
@@ -6,7 +9,7 @@ const timmy = {
   subscription: false,
   coupon: true,
 };
-
+//the total for Sarah should be $37.5
 const sarah = {
   prescription: "diphenhydramine",
   pricePerRefill: 50,
@@ -14,7 +17,7 @@ const sarah = {
   subscription: true,
   coupon: false,
 };
-
+//the total for Rocky should be $102.5
 const rocky = {
   prescription: "phenylephrine",
   pricePerRefill: 30,
@@ -22,69 +25,26 @@ const rocky = {
   subscription: true,
   coupon: true,
 };
-//timmys price
-const tPrice1 = 25;
-const tRefills = 3;
-const tCoup = 10;
-//total refill price
-function tTotalRefillPrice(tPrice1, tRefills) {
-  return tPrice1 * tRefills;
-}
-const tRefillPrice = tTotalRefillPrice(tPrice1, tRefills);
-//log new refill price
-console.log(tRefillPrice);
-//no subscription
-//if coupon $10 off
-function tCouponPrice(tRefillPrice, tCoup) {
-  return tRefillPrice - tCoup;
-}
-const tTotalPrice = tCouponPrice(tRefillPrice, tCoup);
-//log "grand total is ${finalAmount}"
-console.log("Timmy, your grand total is $" + tTotalPrice);
+//create a function to calculate the totals with discounts included
+function calculateTotal(customer) {
+  let total = customer.pricePerRefill * customer.refills;
 
-//sarahs price
-const sPrice1 = 50;
-const sRefills = 1;
-const sSub = 0.75;
-//total refill price
-function sTotalRefillPrice(sPrice1, sRefills) {
-  return sPrice1 * sRefills;
-}
-const sRefillPrice = sTotalRefillPrice(sPrice1, sRefills);
-//log new refill price
-console.log(sRefillPrice);
-//if subscription 25%off
-function sSubPrice(sRefillPrice, sSub) {
-  return sRefillPrice * sSub;
-}
-const sTotalPrice = sSubPrice(sRefillPrice, sSub);
-//no coupon
-//log "grand total is ${finalAmount}"
-console.log("Sarah, your grand total is $" + sTotalPrice);
+  if (customer.subscription) {
+    total *= 0.75;
+  }
 
-//rockys price
-const rPrice1 = 30;
-const rRefills = 5;
-const rSub = 0.75;
-const rCoup = 10;
-//total refill price
-function rTotalRefillPrice(rPrice1, rRefills) {
-  return rPrice1 * rRefills;
+  if (customer.coupon) {
+    total -= 10;
+  }
+
+  return total;
 }
-const rRefillPrice = rTotalRefillPrice(rPrice1, rRefills);
-//log new refill price
-console.log(rRefillPrice);
-//if subscription 25%off
-function rSubPrice(rRefillPrice, rSub) {
-  return rRefillPrice * rSub;
-}
-const rDiscPrice = rSubPrice(rRefillPrice, rSub);
-//log price after subscription discount
-console.log(rDiscPrice);
-//if coupon $10 off
-function rFullDiscPrice(rDiscPrice, rCoup) {
-  return rDiscPrice - rCoup;
-}
-const rTotalPrice = rFullDiscPrice(rDiscPrice, rCoup);
-//log "grand total is$"
-console.log("Rocky, your grand total is $" + rTotalPrice);
+//assigning the totals to each name
+const timmyTotal = calculateTotal(timmy);
+const sarahTotal = calculateTotal(sarah);
+const rockyTotal = calculateTotal(rocky);
+//and here we will write out a solution to show the final totals
+
+console.log(`Timmy, Your grand total is $${timmyTotal}.`);
+console.log(`Sarah, Your grand total is $${sarahTotal}.`);
+console.log(`Rocky, Your grand total is $${rockyTotal}.`);
